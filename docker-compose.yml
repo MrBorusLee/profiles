@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    volumes:
+      - ./profiles:/app/profiles
+      - ./migrations:/app/migrations
+      - ./Makefile:/app/Makefile
+    depends_on:
+      - postgres
+    command: [ "make", "run" ]
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+
+volumes:
+  db-data:

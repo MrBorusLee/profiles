@@ -1,0 +1,14 @@
+include:
+  - local: ".gitlab-ci/build.yaml"
+  - local: ".gitlab-ci/test.yaml"
+  - local: ".gitlab-ci/dev.yaml"
+  - local: ".gitlab-ci/stage.yaml"
+  - local: ".gitlab-ci/prod.yaml"
+
+stages:
+  - build
+  - test
+  - release
+  - dev
+  - stage
+  - prod
